@@ -1,0 +1,19 @@
+*{
+    margin:0;
+    padding: 0;
+}
+body{
+    font-size: 12px;
+}
+img{border: none;}
+input,select,textarea{outline:none}
+textarea{resize: none}
+a{text-decoration:none}
+
+/* 清除浮动 */
+.clearfix:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.clearfix{zoom: 1;}

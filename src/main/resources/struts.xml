@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.i18n.encoding" value="UTF-8" />
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
+
+    <!--url是action里面定义的一个变量，代表最后跳转的位置-->
+    <!--通配符使用，可参考如下博客： http://blog.csdn.net/Holmofy/article/details/78387958-->
+    <!--我这里的意思是： 三个星号分别与包名、类名、方法名 相匹配-->
+    <!--<package name="common" extends="struts-default" namespace="/">
+        <action name="*/*"  class="com.xawl.action.{1}Action" method="{2}" >
+            <result type="dispatcher">${url}</result>
+            <result name="redirect" type="redirect">${url}</result>
+        </action>
+    </package>-->
+
+    <package name="common" namespace="/" extends="struts-default">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="*/*" class="com.xawl.action.{1}Action" method="{2}">
+            <result type="dispatcher">${url}</result>
+            <result name="redirect" type="redirect">${url}</result>
+            <result name="error" type="dispatcher">/admin/error.jsp</result>
+        </action>
+    </package>
+    <package name="json" extends="struts-default,json-default"  namespace="/">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="json/*/*" class="com.xawl.action.{1}Action" method="{2}">
+            <result type="json" >
+                <param name="root">jsonResult</param>
+            </result>
+        </action>
+    </package>
+</struts>
